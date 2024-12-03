@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+    mysql:
+        image: mysql:8.0
+        container_name: laravel_mysql
+        restart: unless-stopped
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: laravel
+            MYSQL_USER: laravel
+            MYSQL_PASSWORD: laravel
+        volumes:
+            - dbdata:/var/lib/mysql
+        networks:
+            - laravel
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+
+volumes:
+    dbdata:
+
+networks:
+    laravel:
+        driver: bridge
