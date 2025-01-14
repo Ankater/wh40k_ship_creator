@@ -1,0 +1,229 @@
+@startuml
+' -----------------------------
+'      Enumerations
+' -----------------------------
+enum HullClass {
+  TRANSPORT
+  RAIDER
+  FRIGATE
+  LIGHT_CRUISER
+  CRUISER
+  BATTLECRUISER
+  GRAND_CRUISER
+}
+
+enum Rarity {
+  LOW
+  MEDIUM
+  HIGH
+  VERY_HIGH
+}
+
+enum ComponentType {
+  PLASMA_ENGINE
+  WARP_DRIVE
+  GELLAR_FIELD
+  VOID_SHIELD
+  SHIP_BRIDGE
+  LIFE_SUPPORT
+  LIVING_QUARTERS
+  SENSORS
+  OTHER
+  WEAPON
+}
+
+enum AttributeType {
+  SPACE
+  COST
+  SPEED
+  DETECTION
+  ARMOR
+  MANEUVER
+  HULL_INTEGRITY
+  TURRET_MOUNTS
+  STRENGTH
+  DAMAGE
+  CRITICAL_DAMAGE
+  RANGE
+}
+
+' -----------------------------
+'      Main Domain Classes
+' -----------------------------
+class Hull {
+  + id: Integer
+  + name: String
+  + hullClass: HullClass
+  + space: Integer
+  + cost: Integer
+  + source: String
+  + speed: Integer
+  + detection: Integer
+  + armor: Integer
+  + maneuver: Integer
+  + hullIntegrity: Integer
+  + turretMounts: Integer
+  --
+  + length: Float
+  + width: Float
+  + mass: Integer
+  + crew: Integer      ' e.g. in tens of thousands
+  + acceleration: Float
+}
+
+class Component {
+  + id: Integer
+  + name: String
+  + energyRequired: Integer
+  + spaceRequired: Integer
+  + cost: Integer
+  + source: String
+  + isArcheotech: Boolean
+  + isXenotech: Boolean
+  + componentType: ComponentType
+}
+
+class Weapon {
+  + id: Integer
+  + name: String
+  + energyRequired: Integer
+  + spaceRequired: Integer
+  + cost: Integer
+  + strength: Integer     ' "Сила"
+  + damage: String        ' e.g. "1d10+2"
+  + criticalDamage: Integer  ' "КУ"
+  + range: String
+  + source: String
+  + isArcheotech: Boolean
+  + isXenotech: Boolean
+}
+
+class Trait {
+  + id: Integer
+  + label: String
+  + description: String
+  + source: String        ' optional: which book/page
+  + rarity: Rarity        ' optional: if used
+  + power: Integer        ' "power", if applicable
+}
+
+' -----------------------------
+'      Many-to-many Bridges
+' -----------------------------
+class TraitForHull {
+  + id: Integer
+  - hullId: Integer
+  - traitId: Integer
+}
+
+class TraitForComponent {
+  + id: Integer
+  - componentId: Integer
+  - traitId: Integer
+}
+
+class TraitForWeapon {
+  + id: Integer
+  - weaponId: Integer
+  - traitId: Integer
+}
+
+' Relationship from Trait --> TraitModifier
+class TraitModifier {
+  + id: Integer
+  + traitId: Integer
+  + attributeType: AttributeType  ' references an enum
+  + modifier: Integer
+}
+
+' -----------------------------
+'      Suitability Tables
+' -----------------------------
+class ComponentHullSuitability {
+  + id: Integer
+  - componentId: Integer
+  - hullClass: HullClass
+}
+
+class WeaponHullSuitability {
+  + id: Integer
+  - weaponId: Integer
+  - hullId: Integer
+}
+
+' -----------------------------
+'      Ship and Its Relations
+' -----------------------------
+class Ship {
+  + id: Integer
+  + name: String
+  + character: String       ' "Характер"
+  + background: String      ' "Прошлое"
+  + origin: String          ' "Происхождение"
+  --
+  + hullId: Integer         ' selected hull
+  + plasmaEngineId: Integer
+  + warpDriveId: Integer
+  + gellarFieldId: Integer
+  + voidShieldId: Integer
+  + shipBridgeId: Integer
+  + lifeSupportId: Integer
+  + sensorsId: Integer
+}
+
+' One-to-many bridging table: living quarters
+class ShipLivingQuarter {
+  + id: Integer
+  + shipId: Integer
+  + componentId: Integer
+}
+
+' One-to-many bridging table: additional components
+class ShipAdditionalComponent {
+  + id: Integer
+  + shipId: Integer
+  + componentId: Integer
+}
+
+' -----------------------------
+'      Relationships
+' -----------------------------
+
+' Ship associations
+Ship --> Hull : hullId
+Ship --> Component : plasmaEngineId
+Ship --> Component : warpDriveId
+Ship --> Component : gellarFieldId
+Ship --> Component : voidShieldId
+Ship --> Component : shipBridgeId
+Ship --> Component : lifeSupportId
+Ship --> Component : sensorsId
+
+Ship "1" -- "0..*" ShipLivingQuarter : has living quarters >
+ShipLivingQuarter "0..*" --> "1" Component : is a living quarters (component)
+
+Ship "1" -- "0..*" ShipAdditionalComponent : has additional components >
+ShipAdditionalComponent "0..*" --> "1" Component
+
+' Trait relationships
+Hull "1" -- "0..*" TraitForHull : has traits
+TraitForHull "0..*" --> "1" Trait
+
+Component "1" -- "0..*" TraitForComponent : has traits
+TraitForComponent "0..*" --> "1" Trait
+
+Weapon "1" -- "0..*" TraitForWeapon : has traits
+TraitForWeapon "0..*" --> "1" Trait
+
+' Suitability
+Hull "1" -- "0..*" WeaponHullSuitability : suitable weapons
+WeaponHullSuitability "0..*" --> "1" Weapon
+
+Component "1" -- "0..*" ComponentHullSuitability : possible hull classes
+
+' New: Trait <--> TraitModifier association
+Trait "1" -- "0..*" TraitModifier : has modifiers
+' The attributeType is an enum
+' inside TraitModifier
+
+@enduml
