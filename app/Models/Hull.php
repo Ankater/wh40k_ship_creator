@@ -3,8 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Hull extends Model
 {
@@ -13,22 +12,25 @@ class Hull extends Model
         'space',
         'price',
         'source',
-        'hull_class_id'
+        'hull_class',
+        'speed',
+        'detection',
+        'armor',
+        'maneuver',
+        'hull_integrity',
+        'turret_mounts',
+        'length',
+        'width',
+        'mass',
+        'crew',
+        'acceleration'
     ];
 
     /**
-     * @return BelongsTo<HullClass, $this>
+     * @return HasMany<TraitForHull, $this>
      */
-    public function hullClass(): BelongsTo
+    public function traits(): HasMany
     {
-        return $this->belongsTo(HullClass::class);
-    }
-
-    /**
-     * @return MorphToMany<ShipTrait, $this>
-     */
-    public function traits(): MorphToMany
-    {
-        return $this->morphToMany(ShipTrait::class, 'traitable');
+        return $this->hasMany(TraitForHull::class);
     }
 }

@@ -47,6 +47,11 @@ enum AttributeType {
   RANGE
 }
 
+enum ShipComplicationsType {
+    MACHINE_SPIRIT_ODDITIES
+    PAST_HISTORY
+}
+
 ' -----------------------------
 '      Main Domain Classes
 ' -----------------------------
@@ -157,8 +162,8 @@ class WeaponHullSuitability {
 class Ship {
   + id: Integer
   + name: String
-  + character: String       ' "Характер"
-  + background: String      ' "Прошлое"
+  + machineOddityId: Integer       ' "Характер"
+  + pastHistoryId: Integer      ' "Прошлое"
   + origin: String          ' "Происхождение"
   --
   + hullId: Integer         ' selected hull
@@ -169,6 +174,20 @@ class Ship {
   + shipBridgeId: Integer
   + lifeSupportId: Integer
   + sensorsId: Integer
+}
+
+class ShipComplications {
+  + id: Integer
+  + label: String
+  + description: String
+  + source: String
+}
+
+class ShipCharacterModifier {
+  + id: Integer
+  + traitId: Integer
+  + attributeType: AttributeType  ' references an enum
+  + modifier: Integer
 }
 
 ' One-to-many bridging table: living quarters
@@ -198,6 +217,8 @@ Ship --> Component : voidShieldId
 Ship --> Component : shipBridgeId
 Ship --> Component : lifeSupportId
 Ship --> Component : sensorsId
+Ship --> ShipComplications: machineOddityId
+Ship --> ShipComplications: pastHistoryId
 
 Ship "1" -- "0..*" ShipLivingQuarter : has living quarters >
 ShipLivingQuarter "0..*" --> "1" Component : is a living quarters (component)
@@ -220,6 +241,8 @@ Hull "1" -- "0..*" WeaponHullSuitability : suitable weapons
 WeaponHullSuitability "0..*" --> "1" Weapon
 
 Component "1" -- "0..*" ComponentHullSuitability : possible hull classes
+
+ShipComplications "0..*" -- "0..*" ShipCharacterModifier
 
 ' New: Trait <--> TraitModifier association
 Trait "1" -- "0..*" TraitModifier : has modifiers
