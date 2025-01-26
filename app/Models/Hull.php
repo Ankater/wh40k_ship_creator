@@ -9,10 +9,10 @@ class Hull extends Model
 {
     protected $fillable = [
         'name',
-        'space',
-        'price',
-        'source',
         'hull_class',
+        'space',
+        'cost',
+        'source',
         'speed',
         'detection',
         'armor',
@@ -22,8 +22,20 @@ class Hull extends Model
         'length',
         'width',
         'mass',
-        'crew',
-        'acceleration'
+        'crew',         // stored as 'tens of thousands'
+        'acceleration',
+    ];
+
+    /**
+     * The attributes that should be cast to native types (or enums).
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'hull_class'    => HullClass::class,
+        'length'        => 'float',
+        'width'         => 'float',
+        'acceleration'  => 'float',
     ];
 
     /**
