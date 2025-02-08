@@ -52,7 +52,7 @@ type Hull @model(class: "App\\Models\\Hull") {
     id: ID!
     name: String!
     cost: Int!
-    hull_class: String!
+    hull_class: HullClass!
     space: Int!
     speed: Int
     detection: Int
@@ -69,4 +69,12 @@ type Hull @model(class: "App\\Models\\Hull") {
     updated_at: DateTime
 }
 
-
+enum HullClass {
+    TRANSPORT
+    RAIDER
+    FRIGATE
+    LIGHT_CRUISER
+    CRUISER
+    BATTLECRUISER
+    GRAND_CRUISER
+}
