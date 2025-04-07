@@ -58,7 +58,7 @@ enum ShipComplicationsType {
 class Hull {
   + id: Integer
   + name: String
-  + hullClass: HullClass
+  + hullClass: Integer
   + space: Integer
   + cost: Integer
   + source: String
@@ -72,8 +72,16 @@ class Hull {
   + length: Float
   + width: Float
   + mass: Integer
-  + crew: Integer      ' e.g. in tens of thousands
+  + crew: Integer      ' e.g. in thousands
   + acceleration: Float
+}
+
+class HullClass {
+  + id: Integer
+  + type: HullClass
+}
+
+class WeaponToHull {
 }
 
 class Component {

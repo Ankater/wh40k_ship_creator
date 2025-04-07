@@ -32,7 +32,7 @@ class Hull extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'hull_class'    => HullClass::class,
+        'hull_class'    => \App\Enums\HullClass::class,
         'length'        => 'float',
         'width'         => 'float',
         'acceleration'  => 'float',
