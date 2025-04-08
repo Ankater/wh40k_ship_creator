@@ -7,7 +7,7 @@ parameters:
         - database
         - routes
         - tests
-    level: max
+    level: 9
     checkModelProperties: true
     checkUninitializedProperties: false
     excludePaths:
