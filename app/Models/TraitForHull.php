@@ -9,6 +9,8 @@ class TraitForHull extends Model
 {
     protected $fillable = ['hull_id', 'trait_id'];
 
+    protected $with = ['trait'];
+
     /**
      * @return BelongsTo<Hull, $this>
      */
