@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class ShipTrait extends Model
 {
+    /** @use HasFactory<\Database\Factories\HullFactory> */
+    use HasFactory;
 
     protected $fillable = ['label', 'description'];
 
