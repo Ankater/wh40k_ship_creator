@@ -97,6 +97,21 @@
                                                                     </ul>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-shipcomplication" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="shipcomplication">
+                    <a href="#shipcomplication">ShipComplication</a>
+                </li>
+                                    <ul id="tocify-subheader-shipcomplication" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="shipcomplication-index">
+                                <a href="#shipcomplication-index">Index</a>
+                            </li>
+                                                            <ul id="tocify-subheader-shipcomplication-index" class="tocify-subheader">
+                                                                            <li class="tocify-item level-3" data-unique="shipcomplication-GETapi-ship-complications">
+                                            <a href="#shipcomplication-GETapi-ship-complications">GET api/ship-complications</a>
+                                        </li>
+                                                                    </ul>
+                                                                        </ul>
+                            </ul>
             </div>
 
     <ul class="toc-footer" id="toc-footer">
@@ -106,7 +121,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: April 26, 2025</li>
+        <li>Last updated: April 27, 2025</li>
     </ul>
 </div>
 
@@ -661,7 +676,7 @@ fetch(url, {
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: 15,
+            &quot;id&quot;: 31,
             &quot;name&quot;: &quot;|&quot;,
             &quot;hull_class&quot;: &quot;TRANSPORT&quot;,
             &quot;space&quot;: 78,
@@ -680,9 +695,9 @@ fetch(url, {
             &quot;acceleration&quot;: 5.6,
             &quot;traits&quot;: [
                 {
-                    &quot;id&quot;: 9,
+                    &quot;id&quot;: 25,
                     &quot;trait&quot;: {
-                        &quot;id&quot;: 8,
+                        &quot;id&quot;: 24,
                         &quot;label&quot;: &quot;i&quot;,
                         &quot;description&quot;: &quot;Quo omnis nostrum aut adipisci quidem nostrum qui commodi incidunt.&quot;
                     }
@@ -690,7 +705,7 @@ fetch(url, {
             ]
         },
         {
-            &quot;id&quot;: 16,
+            &quot;id&quot;: 32,
             &quot;name&quot;: &quot;L&quot;,
             &quot;hull_class&quot;: &quot;RAIDER&quot;,
             &quot;space&quot;: 105,
@@ -709,9 +724,9 @@ fetch(url, {
             &quot;acceleration&quot;: 5.9,
             &quot;traits&quot;: [
                 {
-                    &quot;id&quot;: 10,
+                    &quot;id&quot;: 26,
                     &quot;trait&quot;: {
-                        &quot;id&quot;: 9,
+                        &quot;id&quot;: 25,
                         &quot;label&quot;: &quot;n&quot;,
                         &quot;description&quot;: &quot;Laboriosam praesentium quis adipisci molestias fugit deleniti distinctio eum doloremque id aut libero aliquam veniam.&quot;
                     }
@@ -786,6 +801,150 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="Accept"                data-endpoint="GETapi-hulls"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                <h1 id="shipcomplication">ShipComplication</h1>
+
+    
+
+                        <h2 id="shipcomplication-index">Index</h2>
+                                                    <h2 id="shipcomplication-GETapi-ship-complications">GET api/ship-complications</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-ship-complications">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/ship-complications" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/ship-complications"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-ship-complications">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 9,
+            &quot;label&quot;: &quot;Mollitia deleniti nemo.&quot;,
+            &quot;description&quot;: &quot;Officia est dignissimos neque blanditiis odio veritatis excepturi. Delectus fugit qui repudiandae laboriosam. Alias tenetur ratione nemo voluptate accusamus ut et.&quot;,
+            &quot;source&quot;: &quot;Into the Storm Supplement&quot;,
+            &quot;type&quot;: &quot;MACHINE_SPIRIT_ODDITY&quot;,
+            &quot;created_at&quot;: &quot;2025-04-27T16:28:32.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2025-04-27T16:28:32.000000Z&quot;,
+            &quot;order&quot;: 8
+        },
+        {
+            &quot;id&quot;: 10,
+            &quot;label&quot;: &quot;Repellendus assumenda et.&quot;,
+            &quot;description&quot;: &quot;Reiciendis quia perspiciatis deserunt ducimus corrupti et. Quia maiores assumenda odit. Repellat officiis corporis nesciunt ut. Iure impedit molestiae ut rem est esse sint.&quot;,
+            &quot;source&quot;: &quot;Rogue Trader Core Rulebook&quot;,
+            &quot;type&quot;: &quot;PAST_HISTORY&quot;,
+            &quot;created_at&quot;: &quot;2025-04-27T16:28:32.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2025-04-27T16:28:32.000000Z&quot;,
+            &quot;order&quot;: 9
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-ship-complications" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-ship-complications"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-ship-complications"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-ship-complications" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-ship-complications">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-ship-complications" data-method="GET"
+      data-path="api/ship-complications"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-ship-complications', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-ship-complications"
+                    onclick="tryItOut('GETapi-ship-complications');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-ship-complications"
+                    onclick="cancelTryOut('GETapi-ship-complications');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-ship-complications"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/ship-complications</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-ship-complications"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-ship-complications"
                value="application/json"
                data-component="header">
     <br>

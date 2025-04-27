@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\HullFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Hull extends Model
 {
-    /** @use HasFactory<\Database\Factories\HullFactory> */
+    /** @use HasFactory<HullFactory> */
     use HasFactory;
 
     protected $fillable = [

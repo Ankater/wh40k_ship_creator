@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Enums\HullClass;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Hull>
+ * @extends Factory<Hull>
  */
 class HullFactory extends Factory
 {
@@ -63,7 +63,7 @@ class HullFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function (Hull $hull) {
-            /** @param \App\Models\Hull $hull */
+            /** @param Hull $hull */
             TraitForHull::factory()
                 ->count(rand(0, 2))
                 ->forHull($hull)
