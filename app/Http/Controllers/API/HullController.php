@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Resources\HullResource;
 use App\Models\Hull;
 use Illuminate\Http\JsonResponse;
-use Knuckles\Scribe\Attributes as Scribe;   // ← IMPORT!
+use Knuckles\Scribe\Attributes as Scribe;
 
 #[Scribe\Group('Hulls')]
 #[Scribe\Subgroup('Index')]
