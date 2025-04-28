@@ -25,9 +25,24 @@ const mockApi = {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve([
-          { id: '1', name: 'Rocinante', class: 'Corvette', hull: 'Martian Corvette' },
-          { id: '2', name: 'Donnager', class: 'Battleship', hull: 'Jupiter Class' },
-          { id: '3', name: 'Canterbury', class: 'Freighter', hull: 'Ice Hauler' },
+          {
+            id: '1',
+            name: 'Rocinante',
+            classShip: 'Corvette',
+            hull: { id: 'hull_corvette', name: 'Martian Corvette', class: 'Corvette', speed: 5, manoeuvrability: 10, detection: 5, turretRating: 2, armour: 50, hullIntegrity: 200, traits: [{ name: 'Fast', description: 'Moves quickly' }], weaponSlots: [] },
+          },
+          {
+            id: '2',
+            name: 'Donnager',
+            classShip: 'Battleship',
+            hull: { id: 'hull_battleship', name: 'Jupiter Class', class: 'Battleship', speed: 4, manoeuvrability: 8, detection: 7, turretRating: 3, armour: 75, hullIntegrity: 300, traits: [{ name: 'Balanced', description: 'Good all-around' }], weaponSlots: [] },
+          },
+          {
+            id: '3',
+            name: 'Canterbury',
+            classShip: 'Freighter',
+            hull: { id: 'hull_freighter', name: 'Ice Hauler', class: 'Freighter', speed: 3, manoeuvrability: 5, detection: 10, turretRating: 4, armour: 100, hullIntegrity: 500, traits: [{ name: 'Tough', description: 'Can take a beating' }], weaponSlots: [] },
+          },
         ]);
       }, 500);
     });
@@ -49,7 +64,7 @@ const mockApi = {
             id: 'new',
             name: '',
             hull: null,
-            class: '',
+            classShip: '',
             speed: 0,
             manoeuvrability: 0,
             detection: 0,
@@ -58,6 +73,8 @@ const mockApi = {
             armour: 0,
             hullIntegrity: 0,
             traits: [],
+            machineSpiritOddity: null,
+            shipHistory: null,
             essentialComponents: {
               plasmaDrives: null,
               warpDrives: null,
@@ -81,7 +98,7 @@ const mockApi = {
             id: shipId,
             name: `Ship ${shipId}`,
             hull: { id: 'hull_corvette', name: 'Corvette Hull', class: 'Corvette', speed: 5, manoeuvrability: 10, detection: 5, turretRating: 2, armour: 50, hullIntegrity: 200, traits: [{ name: 'Fast', description: 'Moves quickly' }], weaponSlots: [] },
-            class: 'Corvette',
+            classShip: 'Corvette',
             speed: 5,
             manoeuvrability: 10,
             detection: 5,
@@ -150,7 +167,7 @@ const mockApi = {
     });
   },
 
-  getWeapons: async (location: string): Promise<Weapon[]> => {
+  getWeapons: async (): Promise<Weapon[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve([

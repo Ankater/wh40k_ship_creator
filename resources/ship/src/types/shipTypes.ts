@@ -1,7 +1,21 @@
+export interface Hull {
+  id: string;
+  name: string;
+  class: string;
+  speed: number;
+  manoeuvrability: number;
+  detection: number;
+  turretRating: number;
+  armour: number;
+  hullIntegrity: number;
+  traits: { name: string; description: string }[];
+  weaponSlots: { location: string; count: number }[];
+}
+
 export interface Ship {
   id: string;
   name: string;
-  class?: string;
+  classShip?: string;
   hull?: Hull | null;
   speed?: number;
   manoeuvrability?: number;
@@ -16,20 +30,6 @@ export interface Ship {
   essentialComponents?: EssentialComponents;
   additionalComponents?: AdditionalComponents;
   weaponSlots?: WeaponSlot[];
-}
-
-export interface Hull {
-  id: string;
-  name: string;
-  class: string;
-  speed: number;
-  manoeuvrability: number;
-  detection: number;
-  turretRating: number;
-  armour: number;
-  hullIntegrity: number;
-  traits: Trait[];
-  weaponSlots: { location: string; count: number }[];
 }
 
 export interface Trait {

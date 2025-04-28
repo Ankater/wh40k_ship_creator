@@ -1,10 +1,11 @@
-import { configureStore, UnknownAction } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './slices/authSlice';
 import shipsReducer from './slices/shipsSlice';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    ships: shipsReducer,
     auth: authReducer,
+    ships: shipsReducer,
   },
 });
 
@@ -12,7 +13,3 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export default store;
-
-function authReducer(_state: unknown, _action: UnknownAction): unknown {
-  throw new Error('Function not implemented.');
-}

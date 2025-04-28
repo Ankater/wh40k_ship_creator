@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import mockApi from '../../api/mockApi';
-import { Ship } from '../../types/shipTypes';
+import {AdditionalComponents, EssentialComponents, Hull, Oddity, Ship, Trait, WeaponSlot} from '../../types/shipTypes';
 
 interface ShipsState {
   ships: Ship[];
@@ -26,6 +26,42 @@ export const fetchShipDetails = createAsyncThunk(
   async (shipId: string) => {
     const data = await mockApi.getShipDetails(shipId);
     return data;
+  }
+);
+
+export const createShip = createAsyncThunk(
+  'ships/createShip',
+    async (shipData: Partial<Ship>, { rejectWithValue }) => {
+    try {
+      console.log('Создание нового корабля:', shipData);
+
+      const newShip: {
+          detection?: number;
+          traits?: Trait[];
+          shipHistory?: Oddity | null;
+          speed?: number;
+          armour?: number;
+          shields?: number | null;
+          hullIntegrity?: number;
+          additionalComponents?: AdditionalComponents;
+          essentialComponents?: EssentialComponents;
+          name?: string;
+          machineSpiritOddity?: Oddity | null;
+          id: string;
+          turretRating?: number;
+          hull?: Hull | null;
+          manoeuvrability?: number;
+          weaponSlots?: WeaponSlot[];
+          classShip?: string
+      } = {
+          id: Date.now().toString(),
+          ...shipData,
+      };
+
+      return newShip;
+    } catch (error) {
+      return rejectWithValue(error || 'Ошибка при создании корабля');
+    }
   }
 );
 
@@ -73,6 +109,33 @@ const shipsSlice = createSlice({
       .addCase(fetchShipDetails.fulfilled, (state, action) => {
         state.currentShip = action.payload;
       })
+        .addCase(createShip.fulfilled, (state, action) => {
+            const newShip: Ship = {
+                id: Date.now().toString(),
+                name: action.payload.name || '',
+                classShip: action.payload.classShip || '',
+                speed: action.payload.speed || 0,
+                manoeuvrability: action.payload.manoeuvrability || 0,
+                detection: action.payload.detection || 0,
+                turretRating: action.payload.turretRating || 0,
+                shields: action.payload.shields || null,
+                armour: action.payload.armour || 0,
+                hullIntegrity: action.payload.hullIntegrity || 0,
+                traits: action.payload.traits || [],
+                machineSpiritOddity: action.payload.machineSpiritOddity || null,
+                shipHistory: action.payload.shipHistory || null,
+                essentialComponents: action.payload.essentialComponents || {},
+                additionalComponents: action.payload.additionalComponents || {},
+                weaponSlots: action.payload.weaponSlots || [],
+            };
+
+            state.ships.push(newShip);
+            state.loading = false;
+        })
+      .addCase(createShip.rejected, (state, action) => {
+        state.error = action.payload as string;
+        state.loading = false;
+      })
       .addCase(saveShip.fulfilled, (state, action) => {
         const updatedShip = action.payload;
         const index = state.ships.findIndex((ship) => ship.id === updatedShip.id);
@@ -88,6 +151,7 @@ const shipsSlice = createSlice({
       });
   },
 });
+
 
 export const { setCurrentShip, clearCurrentShip } = shipsSlice.actions;
 export default shipsSlice.reducer;

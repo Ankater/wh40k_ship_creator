@@ -1,47 +1,74 @@
 import React, { useState } from 'react';
-import mockApi from '../../api/mockApi';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { login as loginAction } from '../../store/slices/authSlice';
+import styles from './LoginPage.module.css';
 
-const LoginPage: React.FC<{ onLoginSuccess: () => void }> = ({ onLoginSuccess }) => {
+interface LoginPageProps {
+  onLoginSuccess: (username: string, password: string) => Promise<void>;
+}
+
+const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const { loading, error } = useSelector((state: any) => state.auth);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
     try {
-      const response = await mockApi.login(username, password);
-      if (response.success) {
-        onLoginSuccess();
-      }
+      await dispatch(loginAction({ username, password })).unwrap();
+      onLoginSuccess(username, password);
     } catch (err) {
-      setError(err.message || 'Произошла ошибка');
-    } finally {
-      setIsLoading(false);
+      console.error('Ошибка входа:', err);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Логин"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Пароль"
-      />
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? 'Загрузка...' : 'Войти'}
-      </button>
-      {error && <p>{error}</p>}
-    </form>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <h1 className={styles.title}>Авторизация</h1>
+        {error && <p className={styles.error}>{error}</p>}
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.formGroup}>
+            <label htmlFor="username" className={styles.label}>
+              Логин
+            </label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className={styles.input}
+              placeholder="Введите логин"
+              disabled={loading}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="password" className={styles.label}>
+              Пароль
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.input}
+              placeholder="Введите пароль"
+              disabled={loading}
+            />
+          </div>
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={loading}
+          >
+            {loading ? 'Загрузка...' : 'Войти'}
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 

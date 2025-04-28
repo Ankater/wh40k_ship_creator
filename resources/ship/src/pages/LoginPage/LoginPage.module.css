@@ -5,6 +5,7 @@
   justify-content: center;
   background: linear-gradient(to bottom right, #4a5568, #1a202c);
   padding: 1rem;
+  overflow: hidden;
 }
 
 .card {
@@ -12,8 +13,9 @@
   padding: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: calc(100% - 2rem);
   max-width: 24rem;
+  margin: 0 auto;
 }
 
 .title {
