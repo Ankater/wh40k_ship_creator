@@ -1,9 +1,20 @@
+:root {
+    --primary-color: #2b1b04;
+    --secondary-color: #8b4513;
+    --light-bg: #f5e8d7;
+    --light-bg-transparent: rgba(245, 232, 215, 0.8);
+    --white: #ffffff;
+    --error-color: #e53e3e;
+    --error-bg: #fff5f5;
+    --focus-glow: rgba(236, 245, 255, 0.5);
+}
+
 * {
   box-sizing: border-box ;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; 
+  user-select: none;
 }
 
 html,
