@@ -1,23 +1,23 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'hooks/useAppDispatch';
-import {login as loginAction} from '../../store/slices/authSlice';
 import styles from './LoginPage.module.css';
 import {SubmitHandler, useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
-
-interface LoginPageProps {
-  onLoginSuccess: (username: string, password: string) => Promise<void>;
-}
+import {Link, useNavigate} from "react-router-dom";
+import {RootState} from "store";
+import {useAuth} from "hooks/useAuth";
+import {fetchShips} from "store/slices/shipsSlice";
 
 interface LoginFormInputs {
     username: string;
     password: string;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
+const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { user, loading, error } = useSelector((state: any) => state.auth);
+  const navigate = useNavigate();
+  const { user, loading, error } = useSelector((state: RootState) => state.auth);
+  const { handleLogin } = useAuth();
 
   const {
       register,
@@ -26,11 +26,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
   } = useForm<LoginFormInputs>();
 
   const onSubmitAuthorizationForm: SubmitHandler<LoginFormInputs> = async (data) => {
-      try {
-          await dispatch(loginAction({ username: data.username, password: data.password })).unwrap();
-          await onLoginSuccess(data.username, data.password);
-      } catch (err) {
-          console.error('Ошибка входа:', err);
+      const isLoginSuccessful = await handleLogin(data.username, data.password);
+      if (isLoginSuccessful) {
+          dispatch(fetchShips());
+          navigate('/ships');
       }
   };
 
