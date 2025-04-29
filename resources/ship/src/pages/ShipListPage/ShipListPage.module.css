@@ -1,83 +1,102 @@
 .container {
-  padding: 1rem 2rem;
-  max-width: 1200px;
-  margin: 3rem auto 0;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 3rem auto 0;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
 }
 
 .title {
-  font-size: 1.875rem;
-  font-weight: bold;
-  color: #1a202c;
+    font-size: 1.875rem;
+    font-weight: bold;
+    color: #1a202c;
 }
 
 .createButton {
-  background-color: #38a169;
-  color: white;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  transition: background-color 0.2s;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 1.25rem;
+    transition: background-color 0.2s;
+    cursor: pointer;
 }
 
 .createButton:hover {
-  background-color: #2f855a;
+    background-color: #a0522d;
 }
 
 .error {
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #e53e3e;
-  background-color: #fff5f5;
-  padding: 0.75rem;
-  border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #e53e3e;
+    background-color: #fff5f5;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
 }
 
 .tableContainer {
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .table th {
-  background-color: #f7fafc;
-  padding: 0.75rem 1.5rem;
-  text-align: left;
-  font-size: 0.75rem;
-  color: #4a5568;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+    background-color: #f7fafc;
+    padding: 0.75rem 1.5rem;
+    text-align: left;
+    font-size: 0.75rem;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .table td {
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
-  color: #2d3748;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    color: #2d3748;
+}
+
+.table td:last-child {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .row:hover {
-  background-color: #f8f9fa;
-  cursor: pointer;
+    background-color: #f8f9fa;
+}
+
+.editButton {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1.25rem;
+    transition: background-color 0.2s;
+    margin-right: 0.5rem;
+}
+
+.editButton:hover {
+    background-color: #a0522d;
 }
 
 .deleteButton {
-  color: #e53e3e;
-  font-size: 1.25rem;
-  margin-left: 1rem;
+    color: #e53e3e;
+    font-size: 1rem;
+    border-radius: 1.25rem;
+    margin-left: auto;
 }
 
 .deleteButton:hover {
-  color: #c53030;
+    color: #c53030;
 }
