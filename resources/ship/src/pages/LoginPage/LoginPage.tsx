@@ -13,6 +13,9 @@ interface LoginFormInputs {
     password: string;
 }
 
+/**
+ * Страница авторизации
+ */
 const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
