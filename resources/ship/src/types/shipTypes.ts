@@ -1,7 +1,7 @@
 export interface Hull {
   id: string;
   name: string;
-  class: string;
+  classShip: string;
   speed: number;
   manoeuvrability: number;
   detection: number;
@@ -9,27 +9,26 @@ export interface Hull {
   armour: number;
   hullIntegrity: number;
   traits: { name: string; description: string }[];
-  weaponSlots: { location: string; count: number }[];
 }
 
 export interface Ship {
-  id: string;
-  name: string;
-  classShip?: string;
-  hull?: Hull | null;
-  speed?: number;
-  manoeuvrability?: number;
-  detection?: number;
-  turretRating?: number;
-  shields?: number | null;
-  armour?: number;
-  hullIntegrity?: number;
-  traits?: Trait[];
-  machineSpiritOddity?: Oddity | null;
-  shipHistory?: Oddity | null;
-  essentialComponents?: EssentialComponents;
-  additionalComponents?: AdditionalComponents;
-  weaponSlots?: WeaponSlot[];
+    id: string;
+    name: string;
+    classShip?: string;
+    hull?: string | null;
+    speed?: number;
+    manoeuvrability?: number;
+    detection?: number;
+    turretRating?: number;
+    shields?: number | null;
+    armour?: number;
+    hullIntegrity?: number;
+    traits?: Trait[];
+    machineSpiritOddity?: Oddity | null;
+    shipHistory?: Oddity | null;
+    essentialComponents?: EssentialComponents;
+    additionalComponents?: AdditionalComponents;
+    weaponSlots?: WeaponSlot[];
 }
 
 export interface Trait {

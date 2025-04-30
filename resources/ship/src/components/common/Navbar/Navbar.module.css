@@ -60,7 +60,7 @@
 }
 
 .logoutButton:hover {
-    background-color: #a0522d;
+    background-color: var(--secondary-color-hover);
 }
 
 .loginLink {
@@ -71,5 +71,5 @@
 }
 
 .loginLink:hover {
-    color: var(--secondary-color);
+    background-color: var(--secondary-color-hover);
 }

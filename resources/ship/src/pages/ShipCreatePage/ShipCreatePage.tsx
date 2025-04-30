@@ -5,19 +5,11 @@ import styles from './ShipCreatePage.module.css';
 import { AppDispatch } from 'store/';
 import { createShip } from 'store/slices/shipsSlice';
 import {useNavigate} from "react-router-dom";
+import {ShipFormData} from "@/types/uiTypes";
 
-interface ShipFormData {
-    name: string;
-    classShip: string;
-    speed?: number;
-    manoeuvrability?: number;
-    detection?: number;
-    turretRating?: number;
-    shields?: number;
-    armour?: number;
-    hullIntegrity?: number;
-}
-
+/**
+ * Страница создания нового корабля
+ */
 const ShipCreatePage: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
