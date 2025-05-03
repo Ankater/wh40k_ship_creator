@@ -18,6 +18,7 @@ docker compose run --rm app composer install \
 # 3. Prepare environment & key (first run only)
 docker compose run --rm app cp .env.example .env
 docker compose run --rm app php artisan key:generate
+docker compose run --rm app php artisan migrate
 
 # 4. Launch the stack
 docker compose up
