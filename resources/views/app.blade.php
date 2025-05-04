@@ -11,7 +11,7 @@
 <body>
     <div id="root"></div>
     @viteReactRefresh
-    @vite('resources/js/app.ts')
+    @vite('resources/js/App.tsx')
 </body>
 <script>
     window.env = {

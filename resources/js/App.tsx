@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import LoginPage from './pages/LoginPage';
 import ShipEditPage from './pages/ShipEditPage';
@@ -7,7 +6,7 @@ import { RootState } from './store';
 import './styles/globals.css';
 import ShipCreatePage from "./pages/ShipCreatePage";
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
-import Navbar from "components/common/Navbar";
+import Navbar from "./components/common/Navbar";
 
 export const App: React.FC = () => {
     const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {

@@ -3,7 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import styles from './Navbar.module.css';
 import {AppDispatch, RootState} from "@/store";
 import {useDispatch, useSelector} from "react-redux";
-import {logout} from "store/slices/authSlice";
+import {logout} from "./store/slices/authSlice";
 
 const Navbar: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
