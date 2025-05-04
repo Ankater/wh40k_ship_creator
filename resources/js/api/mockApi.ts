@@ -1,62 +1,62 @@
-import { LoginResponse } from 'types/apiTypes';
-import {
-    Oddity,
-    Ship
-} from 'types/shipTypes';
+import { LoginResponse } from "types/apiTypes";
+import { Oddity, Ship } from "types/shipTypes";
 
 const mockShips: Ship[] = [
     {
-        id: '1',
-        name: 'Rocinante',
-        classShip: 'Corvette',
-        hull: 'hull_corvette',
+        id: "1",
+        name: "Rocinante",
+        classShip: "Corvette",
+        hull: "hull_corvette",
         speed: 5,
         manoeuvrability: 10,
         detection: 5,
         turretRating: 2,
         armour: 50,
         hullIntegrity: 200,
-        traits: [{ name: 'Fast', description: 'Moves quickly' }],
+        traits: [{ name: "Fast", description: "Moves quickly" }],
         weaponSlots: [],
     },
     {
-        id: '2',
-        name: 'Donnager',
-        classShip: 'Battleship',
-        hull: 'hull_battleship',
+        id: "2",
+        name: "Donnager",
+        classShip: "Battleship",
+        hull: "hull_battleship",
         speed: 4,
         manoeuvrability: 8,
         detection: 7,
         turretRating: 3,
         armour: 75,
         hullIntegrity: 300,
-        traits: [{ name: 'Balanced', description: 'Good all-around' }],
+        traits: [{ name: "Balanced", description: "Good all-around" }],
         weaponSlots: [],
     },
     {
-        id: '3',
-        name: 'Canterbury',
-        classShip: 'Freighter',
-        hull: 'hull_freighter',
+        id: "3",
+        name: "Canterbury",
+        classShip: "Freighter",
+        hull: "hull_freighter",
         speed: 3,
         manoeuvrability: 5,
         detection: 10,
         turretRating: 4,
         armour: 100,
         hullIntegrity: 500,
-        traits: [{ name: 'Tough', description: 'Can take a beating' }],
+        traits: [{ name: "Tough", description: "Can take a beating" }],
         weaponSlots: [],
     },
 ];
 
 const mockApi = {
-    login: async (username: string, password: string): Promise<LoginResponse> => {
+    login: async (
+        username: string,
+        password: string,
+    ): Promise<LoginResponse> => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (username === 'admin' && password === 'password') {
-                    resolve({ success: true, user: { name: 'Admin User' } });
+                if (username === "admin" && password === "password") {
+                    resolve({ success: true, user: { name: "Admin User" } });
                 } else {
-                    reject(new Error('Неверный логин или пароль'));
+                    reject(new Error("Неверный логин или пароль"));
                 }
             }, 500);
         });
@@ -85,7 +85,7 @@ const mockApi = {
                 if (ship) {
                     resolve(ship);
                 } else {
-                    throw new Error('Корабль не найден');
+                    throw new Error("Корабль не найден");
                 }
             }, 500);
         });
@@ -93,13 +93,13 @@ const mockApi = {
 
     updateShip: async (
         shipId: string,
-        updatedData: Partial<Ship>
+        updatedData: Partial<Ship>,
     ): Promise<Ship> => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 const shipIndex = mockShips.findIndex((s) => s.id === shipId);
                 if (shipIndex === -1) {
-                    reject(new Error('Корабль не найден'));
+                    reject(new Error("Корабль не найден"));
                 }
 
                 const updatedShip = { ...mockShips[shipIndex], ...updatedData };
@@ -113,17 +113,17 @@ const mockApi = {
     getOddities: async (type: string): Promise<Oddity[]> => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                if (type === 'machine_spirit') {
+                if (type === "machine_spirit") {
                     resolve([
-                        { id: 'odd1', name: 'Stubborn' },
-                        { id: 'odd2', name: 'Inquisitive' },
-                        { id: 'odd3', name: 'Belligerent' },
+                        { id: "odd1", name: "Stubborn" },
+                        { id: "odd2", name: "Inquisitive" },
+                        { id: "odd3", name: "Belligerent" },
                     ]);
-                } else if (type === 'history') {
+                } else if (type === "history") {
                     resolve([
-                        { id: 'hist1', name: 'Relic of Mars' },
-                        { id: 'hist2', name: 'Former Pirate Vessel' },
-                        { id: 'hist3', name: 'Survived Warp Storm' },
+                        { id: "hist1", name: "Relic of Mars" },
+                        { id: "hist2", name: "Former Pirate Vessel" },
+                        { id: "hist3", name: "Survived Warp Storm" },
                     ]);
                 } else {
                     resolve([]);
@@ -135,7 +135,13 @@ const mockApi = {
     saveShip: async (shipData: Ship): Promise<Ship> => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                resolve({ ...shipData, id: shipData.id === 'new' ? Date.now().toString() : shipData.id });
+                resolve({
+                    ...shipData,
+                    id:
+                        shipData.id === "new"
+                            ? Date.now().toString()
+                            : shipData.id,
+                });
             }, 700);
         });
     },

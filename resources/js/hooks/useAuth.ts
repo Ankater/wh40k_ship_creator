@@ -1,6 +1,6 @@
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store';
-import { login as loginAction } from '../store/slices/authSlice';
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store";
+import { login as loginAction } from "../store/slices/authSlice";
 
 /**
  * Хук для получения параметров по авторизации
@@ -13,7 +13,7 @@ export const useAuth = () => {
             await dispatch(loginAction({ username, password })).unwrap();
             return true;
         } catch (err) {
-            console.error('Ошибка входа:', err);
+            console.error("Ошибка входа:", err);
             return false;
         }
     };

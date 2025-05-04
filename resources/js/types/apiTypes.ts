@@ -1,15 +1,14 @@
 import { Component, Hull, Oddity, Ship, Weapon } from "./shipTypes";
 
-
 export interface ApiResponse<T> {
-  success: boolean;
-  data?: T;
-  error?: string;
+    success: boolean;
+    data?: T;
+    error?: string;
 }
 
 export interface LoginResponse {
-  success: boolean;
-  user: { name: string };
+    success: boolean;
+    user: { name: string };
 }
 
 export type ShipResponse = ApiResponse<Ship>;

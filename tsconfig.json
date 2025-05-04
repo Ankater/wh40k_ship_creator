@@ -1,24 +1,23 @@
 {
-  "compilerOptions": {
-    "target": "ES6",
+"compilerOptions": {
+    "target": "ESNext",
     "module": "ESNext",
-    "jsx": "react-jsx",
+    "moduleResolution": "Node",
     "strict": true,
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "baseUrl": "./resources/js",
     "paths": {
-       "@/*": ["*"]
-    },
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "isolatedModules": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+        "@/*": ["./*"],
+        "@components/*": ["./components/*"],
+        "@api/*": ["./api/*"],
+        "@types/*": ["./types/*"],
+        "@pages/*": ["./pages/*"],
+        "@store/*": ["./store/*"]
+    }
+   },
+   "include": ["resources/js/**/*"],
+   "exclude": ["node_modules", "backend"]
 }

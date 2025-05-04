@@ -1,9 +1,9 @@
-import React from 'react';
-import {Link, useNavigate} from 'react-router-dom';
-import styles from './Navbar.module.css';
-import {AppDispatch, RootState} from "@/store";
-import {useDispatch, useSelector} from "react-redux";
-import {logout} from "./store/slices/authSlice";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./Navbar.module.css";
+import { AppDispatch, RootState } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/store/slices/authSlice";
 
 const Navbar: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
 
     const handleLogout = () => {
         dispatch(logout());
-        navigate('/');
+        navigate("/");
     };
 
     return (
@@ -38,7 +38,10 @@ const Navbar: React.FC = () => {
                         </li>
                     </ul>
                     <div className={styles.userSection}>
-                        <button onClick={handleLogout} className={styles.logoutButton}>
+                        <button
+                            onClick={handleLogout}
+                            className={styles.logoutButton}
+                        >
                             Выйти из аккаунта
                         </button>
                     </div>

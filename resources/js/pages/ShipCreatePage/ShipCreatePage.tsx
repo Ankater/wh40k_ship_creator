@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import styles from './ShipCreatePage.module.css';
-import { AppDispatch } from 'store/';
-import { createShip } from 'store/slices/shipsSlice';
-import {useNavigate} from "react-router-dom";
-import {ShipFormData} from "@/types/uiTypes";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import styles from "./ShipCreatePage.module.css";
+import { AppDispatch } from "store/";
+import { createShip } from "@/store/slices/shipsSlice";
+import { useNavigate } from "react-router-dom";
+import { ShipFormData } from "@/types/uiTypes";
 
 /**
  * Страница создания нового корабля
@@ -21,8 +21,8 @@ const ShipCreatePage: React.FC = () => {
         formState: { errors },
     } = useForm<ShipFormData>({
         defaultValues: {
-            name: '',
-            classShip: '',
+            name: "",
+            classShip: "",
             speed: undefined,
             manoeuvrability: undefined,
             detection: undefined,
@@ -38,21 +38,21 @@ const ShipCreatePage: React.FC = () => {
 
         try {
             if (!data.name) {
-                throw new Error('Название корабля обязательно');
+                throw new Error("Название корабля обязательно");
             }
 
             await dispatch(createShip(data)).unwrap();
 
-            navigate('/ships');
+            navigate("/ships");
         } catch (error) {
-            console.error('Ошибка при создании корабля:', error);
+            console.error("Ошибка при создании корабля:", error);
         } finally {
             setLoading(false);
         }
     };
 
     const handleCancel = () => {
-        navigate('/ships');
+        navigate("/ships");
     };
 
     return (
@@ -66,11 +66,15 @@ const ShipCreatePage: React.FC = () => {
                     <input
                         type="text"
                         id="name"
-                        {...register('name', { required: 'Название корабля обязательно' })}
+                        {...register("name", {
+                            required: "Название корабля обязательно",
+                        })}
                         placeholder="Введите название"
                         className={styles.input}
                     />
-                    {errors.name && <p className={styles.error}>{errors.name.message}</p>}
+                    {errors.name && (
+                        <p className={styles.error}>{errors.name.message}</p>
+                    )}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="classShip" className={styles.label}>
@@ -78,7 +82,9 @@ const ShipCreatePage: React.FC = () => {
                     </label>
                     <select
                         id="classShip"
-                        {...register('classShip', { required: 'Выберите класс корабля' })}
+                        {...register("classShip", {
+                            required: "Выберите класс корабля",
+                        })}
                         className={styles.input}
                     >
                         <option value="">Выберите класс</option>
@@ -89,7 +95,11 @@ const ShipCreatePage: React.FC = () => {
                         <option value="Особый корабль">Особый</option>
                         <option value="Сторожевой корабль">Сторожевой</option>
                     </select>
-                    {errors.classShip && <p className={styles.error}>{errors.classShip.message}</p>}
+                    {errors.classShip && (
+                        <p className={styles.error}>
+                            {errors.classShip.message}
+                        </p>
+                    )}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="speed" className={styles.label}>
@@ -98,7 +108,7 @@ const ShipCreatePage: React.FC = () => {
                     <input
                         type="number"
                         id="speed"
-                        {...register('speed', { min: 0 })}
+                        {...register("speed", { min: 0 })}
                         placeholder="Введите скорость"
                         className={styles.input}
                     />
@@ -110,7 +120,7 @@ const ShipCreatePage: React.FC = () => {
                     <input
                         type="number"
                         id="manoeuvrability"
-                        {...register('manoeuvrability', { min: 0 })}
+                        {...register("manoeuvrability", { min: 0 })}
                         placeholder="Введите маневренность"
                         className={styles.input}
                     />
@@ -122,7 +132,7 @@ const ShipCreatePage: React.FC = () => {
                     <input
                         type="number"
                         id="detection"
-                        {...register('detection', { min: 0 })}
+                        {...register("detection", { min: 0 })}
                         placeholder="Введите обнаружение"
                         className={styles.input}
                     />
@@ -134,7 +144,7 @@ const ShipCreatePage: React.FC = () => {
                     <input
                         type="number"
                         id="turretRating"
-                        {...register('turretRating', { min: 0 })}
+                        {...register("turretRating", { min: 0 })}
                         placeholder="Введите рейтинг турелей"
                         className={styles.input}
                     />
@@ -146,7 +156,7 @@ const ShipCreatePage: React.FC = () => {
                     <input
                         type="number"
                         id="shields"
-                        {...register('shields', { min: 0 })}
+                        {...register("shields", { min: 0 })}
                         placeholder="Введите щиты"
                         className={styles.input}
                     />
@@ -158,7 +168,7 @@ const ShipCreatePage: React.FC = () => {
                     <input
                         type="number"
                         id="armour"
-                        {...register('armour', { min: 0 })}
+                        {...register("armour", { min: 0 })}
                         placeholder="Введите броню"
                         className={styles.input}
                     />
@@ -170,16 +180,24 @@ const ShipCreatePage: React.FC = () => {
                     <input
                         type="number"
                         id="hullIntegrity"
-                        {...register('hullIntegrity', { min: 0 })}
+                        {...register("hullIntegrity", { min: 0 })}
                         placeholder="Введите целостность корпуса"
                         className={styles.input}
                     />
                 </div>
                 <div className={styles.actions}>
-                    <button type="submit" className={styles.submitButton} disabled={loading}>
-                        {loading ? 'Создание...' : 'Создать'}
+                    <button
+                        type="submit"
+                        className={styles.submitButton}
+                        disabled={loading}
+                    >
+                        {loading ? "Создание..." : "Создать"}
                     </button>
-                    <button type="button" onClick={handleCancel} className={styles.cancelButton}>
+                    <button
+                        type="button"
+                        onClick={handleCancel}
+                        className={styles.cancelButton}
+                    >
                         Отмена
                     </button>
                 </div>

@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import mockApi from '../../api/mockApi';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import mockApi from "../../api/mockApi";
 
 interface AuthState {
     user: { name: string } | null;
@@ -14,19 +14,19 @@ const initialState: AuthState = {
 };
 
 export const login = createAsyncThunk(
-    'auth/login',
+    "auth/login",
     async ({ username, password }: { username: string; password: string }) => {
         try {
             const response = await mockApi.login(username, password);
             return response.user;
         } catch (error) {
-            throw new Error('Ошибка при авторизации');
+            throw new Error("Ошибка при авторизации");
         }
-    }
+    },
 );
 
 const authSlice = createSlice({
-    name: 'auth',
+    name: "auth",
     initialState,
     reducers: {
         logout: (state) => {
@@ -47,7 +47,7 @@ const authSlice = createSlice({
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Ошибка авторизации';
+                state.error = action.error.message || "Ошибка авторизации";
             });
     },
 });

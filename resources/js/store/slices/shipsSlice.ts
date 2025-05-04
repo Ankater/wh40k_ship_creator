@@ -1,6 +1,6 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import mockApi from '../../api/mockApi';
-import {Ship} from 'types/shipTypes';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import mockApi from "../../api/mockApi";
+import { Ship } from "types/shipTypes";
 
 interface ShipsState {
     ships: Ship[];
@@ -16,29 +16,29 @@ const initialState: ShipsState = {
     error: null,
 };
 
-export const fetchShips = createAsyncThunk('ships/fetchShips', async () => {
+export const fetchShips = createAsyncThunk("ships/fetchShips", async () => {
     const data = await mockApi.getShips();
     return data;
 });
 
 export const fetchShipDetails = createAsyncThunk(
-    'ships/fetchShipDetails',
+    "ships/fetchShipDetails",
     async (shipId: string) => {
         const data = await mockApi.getShipDetails(shipId);
         return data;
-    }
+    },
 );
 
 export const createShip = createAsyncThunk(
-    'ships/createShip',
+    "ships/createShip",
     async (shipData: Partial<Ship>, { rejectWithValue }) => {
         try {
-            console.log('Создание нового корабля:', shipData);
+            console.log("Создание нового корабля:", shipData);
 
             const newShip: Ship = {
                 id: Date.now().toString(),
-                name: shipData.name || '',
-                classShip: shipData.classShip || '',
+                name: shipData.name || "",
+                classShip: shipData.classShip || "",
                 speed: shipData.speed || 0,
                 manoeuvrability: shipData.manoeuvrability || 0,
                 detection: shipData.detection || 0,
@@ -56,45 +56,47 @@ export const createShip = createAsyncThunk(
 
             return newShip;
         } catch (error) {
-            return rejectWithValue(error || 'Ошибка при создании корабля');
+            return rejectWithValue(error || "Ошибка при создании корабля");
         }
-    }
+    },
 );
 
 export const saveShip = createAsyncThunk(
-    'ships/saveShip',
+    "ships/saveShip",
     async (shipData: Ship) => {
         return await mockApi.saveShip(shipData);
-    }
+    },
 );
 
 export const updateShip = createAsyncThunk(
-    'ships/updateShip',
+    "ships/updateShip",
     async (
         { id, updatedData }: { id: string; updatedData: Partial<Ship> },
-        { rejectWithValue }
+        { rejectWithValue },
     ) => {
         try {
             return await mockApi.updateShip(id, updatedData);
         } catch (error) {
             if (error instanceof Error) {
-                return rejectWithValue(error.message || 'Ошибка при обновлении корабля');
+                return rejectWithValue(
+                    error.message || "Ошибка при обновлении корабля",
+                );
             }
-            return rejectWithValue('Неизвестная ошибка');
+            return rejectWithValue("Неизвестная ошибка");
         }
-    }
+    },
 );
 
 export const deleteShip = createAsyncThunk(
-    'ships/deleteShip',
+    "ships/deleteShip",
     async (shipId: string) => {
         await mockApi.deleteShip(shipId);
         return shipId;
-    }
+    },
 );
 
 const shipsSlice = createSlice({
-    name: 'ships',
+    name: "ships",
     initialState,
     reducers: {
         setCurrentShip: (state, action) => {
@@ -116,7 +118,8 @@ const shipsSlice = createSlice({
             })
             .addCase(fetchShips.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Ошибка загрузки кораблей';
+                state.error =
+                    action.error.message || "Ошибка загрузки кораблей";
             })
             .addCase(fetchShipDetails.fulfilled, (state, action) => {
                 state.currentShip = action.payload;
@@ -131,7 +134,9 @@ const shipsSlice = createSlice({
             })
             .addCase(saveShip.fulfilled, (state, action) => {
                 const updatedShip = action.payload;
-                const index = state.ships.findIndex((ship) => ship.id === updatedShip.id);
+                const index = state.ships.findIndex(
+                    (ship) => ship.id === updatedShip.id,
+                );
                 if (index !== -1) {
                     state.ships[index] = updatedShip;
                 } else {
@@ -141,14 +146,21 @@ const shipsSlice = createSlice({
             })
             .addCase(updateShip.fulfilled, (state, action) => {
                 const updatedShip = action.payload;
-                const index = state.ships.findIndex((ship) => ship.id === updatedShip.id);
+                const index = state.ships.findIndex(
+                    (ship) => ship.id === updatedShip.id,
+                );
                 if (index !== -1) {
-                    state.ships[index] = { ...state.ships[index], ...updatedShip };
+                    state.ships[index] = {
+                        ...state.ships[index],
+                        ...updatedShip,
+                    };
                 }
                 state.currentShip = updatedShip;
             })
             .addCase(deleteShip.fulfilled, (state, action) => {
-                state.ships = state.ships.filter((ship) => ship.id !== action.payload);
+                state.ships = state.ships.filter(
+                    (ship) => ship.id !== action.payload,
+                );
             });
     },
 });
