@@ -7,38 +7,38 @@ const resolve = (dir) => path.resolve(__dirname, dir);
 
 export default defineConfig({
     server: {
-        port: 5173,
-        host: 'localhost',
+        host: '0.0.0.0',
+        port: 5174,
         strictPort: true,
         hmr: {
             host: 'localhost',
-            port: 5173
-        }
+            port: 5174,
+        },
+        watch: {
+            usePolling: true,
+        },
     },
     plugins: [
-        react({
-            include: /\.(js|jsx|ts|tsx)$/,
-        }),
-
+        react(),
         laravel({
             input: ['resources/js/index.tsx'],
             refresh: true,
         }),
     ],
-
+    css: {
+        modules: {
+            localsConvention: 'camelCase',
+            generateScopedName: '[name]__[local]___[hash:base64:5]',
+        },
+    },
     build: {
         outDir: 'public/build',
         assetsDir: 'assets',
         manifest: true,
         rollupOptions: {
-            input: {
-                app: 'resources/js/index.tsx'
-            }
-        }
+            input: 'resources/js/index.tsx',
+        },
     },
-
-    publicDir: 'public',
-
     resolve: {
         alias: {
             '@': resolve('resources/js'),
@@ -49,8 +49,7 @@ export default defineConfig({
             '@store': resolve('resources/js/store'),
         },
     },
-
     optimizeDeps: {
-        include: ['react', 'react-dom', 'react-router-dom']
-    }
+        include: ['react', 'react-dom', 'react-router-dom'],
+    },
 });

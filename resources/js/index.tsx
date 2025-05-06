@@ -4,12 +4,12 @@ import { Provider } from "react-redux";
 import { store } from "@/store";
 import App from "@/App";
 
-export const rootElement = document.getElementById("root");
+const rootElement = document.getElementById("root");
 if (!rootElement) {
     throw new Error("Root element not found");
 }
 
-export const root = ReactDOM.createRoot(rootElement);
+const root = ReactDOM.createRoot(rootElement);
 root.render(
     <React.StrictMode>
         <Provider store={store}>
