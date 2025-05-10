@@ -19,11 +19,11 @@ export default defineConfig({
         },
     },
     plugins: [
-        react(),
         laravel({
-            input: ['resources/js/index.tsx'],
+            input: ['resources/css/app.css', 'resources/js/index.tsx'],
             refresh: true,
         }),
+        react(),
     ],
     css: {
         modules: {
