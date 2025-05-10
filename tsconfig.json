@@ -16,7 +16,8 @@
         "@types/*": ["./types/*"],
         "@pages/*": ["./pages/*"],
         "@store/*": ["./store/*"]
-    }
+    },
+    "types": ["vite/client"],
    },
    "include": ["resources/js/**/*"],
    "exclude": ["node_modules", "backend"]

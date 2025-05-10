@@ -9,7 +9,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { fetchShips } from "@/store/slices/shipsSlice";
 
 interface LoginFormInputs {
-    username: string;
+    email: string;
     password: string;
 }
 
@@ -31,15 +31,12 @@ const LoginPage: React.FC = () => {
     } = useForm<LoginFormInputs>();
 
     const onSubmitAuthorizationForm: SubmitHandler<LoginFormInputs> = async (
-        data,
+        data
     ) => {
-        const isLoginSuccessful = await handleLogin(
-            data.username,
-            data.password,
-        );
-        if (isLoginSuccessful) {
+        const ok = await handleLogin(data.email, data.password);
+        if (ok) {
             dispatch(fetchShips());
-            navigate("/ships");
+            navigate('/ships');
         }
     };
 
@@ -76,56 +73,39 @@ const LoginPage: React.FC = () => {
                         >
                             <fieldset disabled={loading}>
                                 <div className={styles.formGroup}>
-                                    <label
-                                        htmlFor="username"
-                                        className={styles.label}
-                                    >
-                                        Логин
+                                    <label htmlFor="email" className={styles.label}>
+                                        E-mail
                                     </label>
                                     <input
-                                        type="text"
-                                        id="username"
-                                        {...register("username", {
-                                            required: "Логин обязателен",
-                                        })}
+                                        type="email"
+                                        id="email"
+                                        {...register('email', { required: 'E-mail обязателен' })}
                                         className={styles.input}
-                                        placeholder="Введите логин"
-                                        aria-label="Логин"
+                                        placeholder="you@example.com"
+                                        aria-label="E-mail"
                                     />
-                                    {errors.username && (
-                                        <p className={styles.error}>
-                                            {errors.username.message}
-                                        </p>
-                                    )}
+                                    {errors.email && <p className={styles.error}>{errors.email.message}</p>}
                                 </div>
+
                                 <div className={styles.formGroup}>
-                                    <label
-                                        htmlFor="password"
-                                        className={styles.label}
-                                    >
+                                    <label htmlFor="password" className={styles.label}>
                                         Пароль
                                     </label>
                                     <input
                                         type="password"
                                         id="password"
-                                        {...register("password", {
-                                            required: "Пароль обязателен",
-                                        })}
+                                        {...register('password', { required: 'Пароль обязателен' })}
                                         className={styles.input}
                                         placeholder="Введите пароль"
                                         aria-label="Пароль"
                                     />
                                     {errors.password && (
-                                        <p className={styles.error}>
-                                            {errors.password.message}
-                                        </p>
+                                        <p className={styles.error}>{errors.password.message}</p>
                                     )}
                                 </div>
-                                <button
-                                    type="submit"
-                                    className={styles.submitButton}
-                                >
-                                    {loading ? "Загрузка..." : "Войти"}
+
+                                <button type="submit" className={styles.submitButton}>
+                                    {loading ? 'Загрузка…' : 'Войти'}
                                 </button>
                             </fieldset>
                         </form>
